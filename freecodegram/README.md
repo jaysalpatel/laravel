@@ -47,3 +47,29 @@ SQLite database
     php artisan migrate
 
 when you make changes to .env file, you have to stop php artisan process
+
+
+For HTML validation
+makes POST back to server  
+then server validates data
+and then it comes back to us
+and the fields are required
+
+Controllers is where the PHP logic is contained
+User get created in the Register controller
+
+
+Whenever you make changes to your database you must run 
+php artisan migrate:fresh
+//drops all the tables and creates the database from scratch
+
+
+Now we are making a new controller
+php artisan make:controller
+
+Next step is making a new model
+make:model represents a table in our database, each object is a row
+each user will have a row
+
+php artisan help make:model
+eloquent: database framework

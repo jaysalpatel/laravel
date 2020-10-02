@@ -7,7 +7,7 @@
     <img src="https://cdn.changelog.com/uploads/icons/news_sources/Qo/icon_large.png?v=63680075631" alt="" class="rounded-circle" style="max-height:200px">
    </div>
    <div class="col-9 pt-5">
-   <div><h1> freecodecamp</h1></div>
+   <div><h1> <?$user?> </h1></div>
    <div>
    </div>
    <div class="d-flex">
