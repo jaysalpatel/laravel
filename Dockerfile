@@ -1,14 +1,18 @@
-FROM php7:laravel
+FROM composer:7.3 as composer
+ENV APP_NAME=socialmedia
+ENV APP_ENV=dev
+ENV APP_URL=http://localhost:8000
 ENV RUN_USER daemon
 ENV RUN_GROUP daemon
 ENV INSTALL_DIR /opt/navi
 ENV DB_HOST 127.0.0.1
 ENV DB_PORT 3306
-ENV DB_DATABASE homestead
-ENV DB_USERNAME homestead
-ENV DB_PASSWORD secret
+ENV DB_DATABASE freecodegram
+ENV DB_USERNAME user1
+ENV DB_PASSWORD password
 ENV LOGIN_COPTCHA true 
-
+ENV PATH=./vendor/bin:/composer/vendor/bin:/root/.yarn/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV COMPOSER_ALLOW_SUPERUSER=1
 EXPOSE 8000
 COPY entrypoint.sh /entrypoint.sh
 
@@ -46,27 +50,20 @@ RUN php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php
     php composer-setup.php --install-dir=/usr/local/bin --filename=composer && \
     php -r "unlink('composer-setup.php');"
 
-# Install Laravel Envoy
-RUN composer global require "laravel/envoy=~1.0"
-
 RUN php -v && \
     git --version && \
     composer --version
-
-## Change Apache root directory
-ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 
 WORKDIR ${INSTALL_DIR}
 CMD ["/entrypoint.sh", "serve"]
 ENTRYPOINT ["/sbin/tini", "--"]
 
-FROM composer:1.6.5 as build
 WORKDIR /app
 COPY . /app
 RUN composer install 
 
 RUN npm run dev
 RUN php artisan serve
+EXPOSE 8000
+CMD ["php", "artisan", "serve"]
