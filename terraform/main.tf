@@ -33,7 +33,7 @@ module "vpc" {
 }
 
 // database
-module "aurora" {
+module "rds" {
   source     = "./modules/rds"
   stack_name = "${var.stack_name}"
   subnet_ids = "${module.vpc.public_subnet_ids}"

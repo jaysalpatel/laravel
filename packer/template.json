@@ -1,18 +1,19 @@
 {
+
+    
     "builders": [
         {
             "type": "amazon-ebs",
             "region": "us-east-1",
-            "access_key": "aws_access_key",
-            "secret_key": "aws_secret_key",
-            
+           
             "source_ami_filter": {
                 "filters": {
                     "virtualization-type": "hvm",
-                    "name": "laravel-ami",
+                    "name": "ubuntu/images/*ubuntu-xenial-16.04-amd64-server-*",
+                    "block-device-mapping.volume-type": "gp2",
                     "root-device-type": "ebs"
                 },
-                "owners": ["536510685689"],
+                "owners": ["679593333241"],
                 "most_recent": true
             },
             "snapshot_tags": {
