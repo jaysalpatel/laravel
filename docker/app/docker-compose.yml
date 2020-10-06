@@ -1,0 +1,39 @@
+version: '2'
+
+networks:
+  network:
+    driver: bridge
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - network
+    logging:
+      driver: awslogs
+      options:
+        awslogs-region: "eu-west-1"
+        awslogs-group: "laravel"
+        awslogs-create-group: "true"
+
+
+  mysql:
+    image: mysql:5.7
+    logging:
+      driver: awslogs
+      options:
+        awslogs-region: "us-east-1"
+        awslogs-group: "mysql"
+        awslogs-create-group: "true"
+    volumes:
+      - dbdata:/var/lib/mysql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - MYSQL_DB
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+    networks:
+      - network

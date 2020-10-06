@@ -1,5 +1,7 @@
 variable "stack_name" {}
-
+variable "b_nat_gateway" {
+    default = "false"
+}
 data "aws_region" "current" {}
 data "aws_availability_zones" "available" {}
 
@@ -54,27 +56,6 @@ resource "aws_route_table_association" "public_rt_associations" {
   route_table_id = "${aws_route_table.public_routetable.id}"
 }
 
-// Private subnets
-resource "aws_eip" "eips" {
-  vpc     = true
-  count   = "${var.b_nat_gateway == true ? 1 : 0}"
-
-  tags {
-    Name = "${var.stack_name}"
-  }
-}
-
-resource "aws_nat_gateway" "nat_gateway" {
-  count   = "${var.b_nat_gateway == true ? 1 : 0}"
-  allocation_id = "${aws_eip.eips.id}"
-  subnet_id     = "${aws_subnet.public_subnets.*.id[0]}"
-
-  depends_on = ["aws_internet_gateway.internet_gateway"]
-
-  tags {
-    Name = "${var.stack_name}"
-  }
-}
 
 resource "aws_subnet" "private_subnets" {
   count             = "${local.nb_azs}"
