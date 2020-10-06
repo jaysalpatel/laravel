@@ -32,7 +32,7 @@ RUN rm -rf /node/node_modules
 ## build app container
 FROM alpine:3.12
 WORKDIR /app
-COPY ./infrastructure /config
+COPY ./terraform /app 
 COPY --from=node /node /app
 
 # set requirement privileges
