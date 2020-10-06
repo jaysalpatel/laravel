@@ -32,10 +32,12 @@ to apply the changes to reach the desired state run
 Packer is used to create machine images with a provisioning script to install php packages, run php artisan commands and set file privilages to read, write and execute for owner
 Also I will eventually implement a Continuous Integration step to build a packer AMI and push it to AWS and recreate EC2 instances with that specific AMI
 
-this command will validate the tempalte
+this command will validate the template
+
     packer validate
   
 this command will build our template with the execution script to provision packages and dependencies
+
     packer build
 
 
