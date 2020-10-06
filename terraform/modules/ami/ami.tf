@@ -1,4 +1,4 @@
-data "aws_ami" "laravel-aws" {
+data "aws_ami" "laravel-ami" {
   executable_users = ["self"]
   most_recent      = true
   name_regex       = "^myami-\\d{3}"

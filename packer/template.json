@@ -6,7 +6,7 @@
             "source_ami_filter": {
                 "filters": {
                     "virtualization-type": "hvm",
-                    "name": "Laravel-AMI",
+                    "name": "laravel-ami",
                     "root-device-type": "ebs"
                 },
                 "owners": ["536510685689"],
@@ -40,12 +40,13 @@
                 "composer install",
                 "composer require laravel/ui",
                 "php artisan ui vue --auth",
+                "php artisan serve",
                 "npm install && npm run dev",
                 "php artisan migrate",
                 "php artisan migrate:fresh",
                 "php artisan make:controller",
                 "php artisan make:model"
-
+                
             ]
         }
     ]

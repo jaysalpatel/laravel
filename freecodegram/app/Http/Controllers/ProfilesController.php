@@ -14,8 +14,6 @@ class ProfilesController extends Controller
 
         return('view('home', [
 
-
-
         ]
     }
 

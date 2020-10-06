@@ -1,17 +1,29 @@
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+apt-get update && \
+    apt-get install -y \
+    php7.4-bcmath \
+    php7.4-fpm \
+    php7.4-cli \
+    php7.4-mbstring \
+    php7.4-xml \
+    php7.4-zip \
+    php7.4-curl \
+    php7.4-intl \
+    php7.4-gd \
+    php7.4-sqlite3 \
+    php7.4-mysql \
+    php7.4-pgsql 
+cd /var/www/html
 
-ADD . /var/www/html
-WORKDIR /var/www/html
-
-RUN mkdir storage/logs
-RUN touch storage/logs/laravel.log
+mkdir storage/logs
+touch storage/logs/laravel.log
 
 RUN composer install
-RUN php artisan cache:clear
-RUN php artisan view:clear
-RUN php artisan route:cache
+php artisan cache:clear
+php artisan view:clear
+php artisan route:cache
 
-RUN chmod -R 777 /var/www/html/storage
+chmod -R 777 /var/www/html/storage
 
-CMD ["/bin/sh", "-c", "php-fpm -D | tail -f storage/logs/laravel.log"]
+
