@@ -1,0 +1,52 @@
+{
+    "builders": [
+        {
+            "type": "amazon-ebs",
+            "region": "us-east-1",
+            "source_ami_filter": {
+                "filters": {
+                    "virtualization-type": "hvm",
+                    "name": "Laravel AMI",
+                    "root-device-type": "ebs"
+                },
+                "owners": ["536510685689"],
+                "most_recent": true
+            },
+            "snapshot_tags": {
+                "Name": "My Project built with an Laravel AMI"
+            },
+            "instance_type": "t2.micro",
+            "ssh_username": "key",
+            "ssh_interface": "public_ip",
+            "ami_name": "My Project built with an Laravel AMI",
+            "force_delete_snapshot": true,
+            "force_deregister": true,
+            "shutdown_behavior": "terminate"
+        }
+    ],
+
+    "provisioners": [
+        {
+            "destination": "/var/www/html/",
+            "source": "./provision.sh",
+            "type": "file"
+        },
+        {
+            "type": "shell",
+            "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} bash -l {{ .Path }}",
+            "inline": [
+                "cd /var/www/app",
+                "cd /var/www/app/src",
+                "composer install",
+                "composer require laravel/ui",
+                "php artisan ui vue --auth",
+                "npm install && npm run dev",
+                "php artisan migrate",
+                "php artisan migrate:fresh",
+                "php artisan make:controller",
+                "php artisan make:model"
+
+            ]
+        }
+    ]
+}

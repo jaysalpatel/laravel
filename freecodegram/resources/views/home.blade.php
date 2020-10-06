@@ -11,13 +11,13 @@
    <div>
    </div>
    <div class="d-flex">
-    <div class="pr-5"><strong>155</strong> Posts</div>
-    <div class="pr-5"><strong>25k</strong> followers</div>
-    <div class="pr-4"><strong>200</strong>following</div>
+    <div class="pr-5"><strong>3</strong> Posts</div>
+    <div class="pr-5"><strong>0</strong> followers</div>
+    <div class="pr-4"><strong>0</strong>following</div>
    </div>
-   <div class="pt-4 font-weight-bold">freecodecamp.org</div>
-   <div>we are a global community of millions of people learning to code together</div>
-   <div><a href="#"></a> www.freecodecamp.org</div>
+   <div class="pt-4 font-weight-bold">Jaysal Patel</div>
+   <div>I am a passionate individual in the field IT working everyday to expand my knowledge in the Devops field.</div>
+   <div><a href="#"></a> github.com/jaysalpatel</div>
    </div>
    </div>
    <div class="row">
