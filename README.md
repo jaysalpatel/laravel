@@ -18,25 +18,25 @@ Terraform is an infrastructure as code tool to provision my AWS infrastructure w
 
 to initialize a working directory containing configuration files
 
-  terraform init
+    terraform init
 
 To create an execution plan run
 
-  terraform plan
+    terraform plan
 
 to apply the changes to reach the desired state run
 
-  terraform apply
+    terraform apply
   
   
 Packer is used to create machine images with a provisioning script to install php packages, run php artisan commands and set file privilages to read, write and execute for owner
 Also I will eventually implement a Continuous Integration step to build a packer AMI and push it to AWS and recreate EC2 instances with that specific AMI
 
 this command will validate the tempalte
-  packer validate
+    packer validate
   
 this command will build our template with the execution script to provision packages and dependencies
-  packer build
+    packer build
 
 
 I could have homestead instead to create custom vagrant boxes with php, composer, laravel and associated software packages installed
