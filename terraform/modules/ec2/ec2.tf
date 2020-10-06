@@ -5,12 +5,12 @@ variable "s3_bucket_arn" {}
 
 data "aws_region" "current" {}
 
-data "aws_ami" "ubuntu" {
+data "aws_ami" "laravel-ami" {
   most_recent = true
-
+  source = "./ami/ami.tf"
   filter {
     name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-xenial-18.04-amd64-server-*"]
+    values = ["laravel-ami"]
   }
 
   filter {
@@ -21,8 +21,8 @@ data "aws_ami" "ubuntu" {
   owners = ["536510685689"]
 }
 
-resource "aws_instance" "vm" {
-  ami                         = "${data.aws_ami.ubuntu.id}"
+resource "aws_instance" "laravel-vm" {
+  ami                         = "${data.aws_ami.laravel-ami.id}"
   instance_type               = "t2.micro"
   associate_public_ip_address = true
   key_name                    = "${aws_key_pair.generated.key_name}"
